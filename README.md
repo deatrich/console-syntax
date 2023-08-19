@@ -11,7 +11,7 @@ options it is very useful to **highlight** command line console sessions.
 
 Pandoc uses the Haskell *skylighting* library for syntax highlighting.  The
 highlighting descriptions are written in XML, using XML syntax descriptions
-[for KDE's Kate syntax highligting][kde-syntax-hi].
+[for KDE's Kate syntax highlighting][kde-syntax-hi].
 
 By adding Kate syntax highlighting I was able to present console sessions
 as fenced code blocks with more interesting syntax highlighting in 
