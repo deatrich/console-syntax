@@ -115,7 +115,7 @@ tar -zcf root.tgz /root
 // 'virsh' is the 'Virtual Shell' command line interface for managing
 //  virtual machines.
 // It requires the following text starting in the first position on a line,
-// followed by a manditory space:
+// followed by a manditory space:  'virsh # '
 
 virsh # 
 
@@ -144,12 +144,6 @@ virsh # quit
 mysql> 
  ;
 
-$ mysql -u rw -h 192.168.1.63 -p webdb
-...
-Type 'help;' or '\h' for help...
-mysql> ;
-
-
 // Using a semi-colon to end a command is normal for traditional mysql
 // commands.  A few mysql commands like 'USE', 'QUIT' and 'EXIT' do not
 // require a semi-colon to terminate the command, but for the sake of syntax
@@ -164,6 +158,13 @@ mysql> show variables like '%engine%';
 
 mysql>  grant all privileges on webdb.* to 'rw'@'192.168.1.%'
     -> identified by 'some_password_here';
+
+mysql> quit;
+Bye
+
+$ mysql -u rw -h 192.168.1.63 -p webdb
+...
+Type 'help;' or '\h' for help...
 
 mysql> insert into members (email) values ('Y')
 ;
