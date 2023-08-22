@@ -1,0 +1,208 @@
+# Example *console* session {#test.console}
+
+```console
+// ----------------------------------------------------------------------------
+// COMMENTS:
+
+// Comments are highlighted differently from all other console input/output.
+// In fact, all comments are for instruction only, and are never part of
+// terminal console input/output.
+
+// Comments are handy when you want to explain what you are doing, and why.
+
+// Comments start with 2 forward slashes as the first 2 characters, followed
+// by a manditory space character.
+
+
+// ----------------------------------------------------------------------------
+// NORMAL CONSOLE OUTPUT MODE:
+
+// All console output is in default output mode, which usually means the reverse
+// of your background colour.  So, if your background is black then normal text
+// is white or a light colour.  If the background is white then normal text
+// is black.  As an example, this is a fragment of 'dmesg' output:
+
+[Fri Aug 18 08:00:41 2023] RPC: Registered named UNIX socket transport module.
+[Fri Aug 18 08:00:41 2023] RPC: Registered udp transport module.
+[Fri Aug 18 08:00:41 2023] RPC: Registered tcp transport module.
+[Fri Aug 18 08:00:41 2023] RPC: Registered tcp NFSv4.1 backchannel transport module.
+
+
+// ----------------------------------------------------------------------------
+// REGULAR USER 'command prompts':
+
+// By regular user, we mean NOT the 'root' superuser.
+
+// If the command shell is a bourne-style shell in a Linux or UNIX environment
+// then the prompt is represented by a 'dollar' character as the first character
+// followed by a mandatory space character.
+
+// It should be a green colour in bold font.
+
+$ 
+$ whoami
+myloginname
+
+// Similarly if the command shell is the C shell then the prompt is
+// represented by a 'percent' character as the first character followed by
+// a mandatory space character.
+
+% 
+% echo $shell
+/bin/tcsh
+
+
+// ----------------------------------------------------------------------------
+// THE 'root' USER 'command prompt':
+// 
+// For the root user we assume a bourne shell and we represent the command
+// prompt by a 'pound' character (also known as the number sign or hash sign)
+// as the first character followed by a manditory space character.
+// It should be a red colour in bold font.
+
+// We transition from being a regular user to the superuser with sudo here:
+$ sudo /bin/sh
+[sudo] password for myloginname:
+# whoami
+root
+
+
+// ----------------------------------------------------------------------------
+// COMMAND LINE AND LINE CONTINUATION:
+
+// No matter which of the command prompts is in use, all will keep their
+// prompt display properties when a command spreads over more than one
+// line, provided that the 'backslash' character appears as the very last 
+// character of any command line fragment.  It is known as the line continuation
+// character.
+// Here are some examples.  For bourne shells a greater-than character '>'
+// sub-prompt appears, waiting for command completion.  For C shells 
+// a question mark '?' sub-prompt appears:
+
+$ grep  Firewall: /var/log/messages | \
+> awk '{print $11}' | sort -u | \
+> sed 's/SRC=//' | head
+104.100.67.156
+104.103.120.57
+104.103.125.29
+104.103.126.18
+104.103.126.229
+104.103.189.128
+104.103.211.131
+104.193.88.77
+104.254.148.251
+104.254.148.252
+
+# for i in boot etc root ; do \
+> echo tar -zcf $i.tgz /$i; \
+> done
+tar -zcf boot.tgz /boot
+tar -zcf etc.tgz /etc
+tar -zcf root.tgz /root
+
+% ps -ef | grep -i xfs | \
+? wc -l
+59
+
+
+// ----------------------------------------------------------------------------
+// OTHER SHELL-LIKE COMMANDS:
+// 
+// So far, 3 other commands which provide an interactive shell-like interface
+// are syntax-highlighted as well.
+// They should all be a purple colour in bold font.
+// I could add more commands in the future.
+
+
+// ----------------------------------------------------------------------------
+// 'virsh' is the 'Virtual Shell' command line interface for managing
+//  virtual machines.
+// It requires the following text starting in the first position on a line,
+// followed by a manditory space:  'virsh # '
+
+virsh # 
+
+// Examples:
+
+virsh # help connect
+  NAME
+    connect - (re)connect to hypervisor
+...
+
+virsh # list      
+ Id    Name                           State
+----------------------------------------------------
+ 1     ubuntu                         running
+
+virsh # quit
+
+
+// ----------------------------------------------------------------------------
+// 'mysql' is the interactive console interface for managing a MySQL
+// database.
+// It requires the following text starting in the first position on a line,
+// followed by a manditory space.  A semicolon is required to end the command
+// text:
+
+mysql> 
+ ;
+
+// Using a semi-colon to end a command is normal for traditional mysql
+// commands.  A few mysql commands like 'USE', 'QUIT' and 'EXIT' do not
+// require a semi-colon to terminate the command, but for the sake of syntax
+// highlighting here you must use a semi-colon.
+
+mysql> show variables like '%engine%';
++----------------------------+--------+
+| Variable_name              | Value  |
++----------------------------+--------+
+| default_storage_engine     | InnoDB |
+...
+
+mysql>  grant all privileges on webdb.* to 'rw'@'192.168.1.%'
+    -> identified by 'some_password_here';
+
+mysql> quit;
+Bye
+
+$ mysql -u rw -h 192.168.1.63 -p webdb
+...
+Type 'help;' or '\h' for help...
+
+mysql> insert into members (email) values ('Y')
+;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> quit;
+Bye
+
+
+// ----------------------------------------------------------------------------
+// 'mariadb' is the interactive console interface for managing a MariaDB
+// database.  The only difference for syntax highlighting purposes between
+// mariadb and mysql is the prompt; otherwise the console behaviour is the same.
+
+$ mariadb -u root -p
+Enter password:
+...
+MariaDB> use mysql;
+Database changed
+
+MariaDB> show tables like 'time%';
++---------------------------+
+| Tables_in_mysql (time%)   |
++---------------------------+
+| time_zone                 |
+| time_zone_leap_second     |
+| time_zone_name            |
+| time_zone_transition      |
+| time_zone_transition_type |
++---------------------------+
+5 rows in set (0.00 sec)
+
+MariaDB> exit;
+Bye
+
+// ----------------------------------------------------------------------------
+```
+
