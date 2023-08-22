@@ -1,0 +1,3 @@
+metadata.md
+../using-console-syntax.md
+../example-console-session.md
