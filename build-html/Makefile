@@ -6,7 +6,7 @@
 #***************************************************************************
 
 #***************************************************************************
-.SUFFIXES : .md .html .pdf .docx
+.SUFFIXES : .md .html .pdf
 #.SILENT :
 
 #***************************************************************************
@@ -15,16 +15,15 @@
 ## Change 'PROJECT' to the name of the target document you are generating:
 PROJECT		= console-syntax
 FILELIST	= contents.txt
-GENDIR		= "Generated/"
+GENDIR		= "../Generated/"
 
 ## Change the publication path for your generated files (assuming a local area)
-PUBDIR		= "/path/to/$(PROJECT)/latest-version/"
+PUBDIR		= "../../deatrich.github.io/$(PROJECT)/"
 
 MDFILE		= $(PROJECT).md
 MDFILES		= $(shell cat ${FILELIST})
 HTMLOBJECT	= $(MDFILE:.md=.html)
 PDFOBJECT	= $(MDFILE:.md=.pdf)
-DOCXVIEWER	= lowriter
 PDFVIEWER	= evince
 HTMLVIEWER	= firefox
 
@@ -33,7 +32,8 @@ PRINTOPT	=
 PANDOC_OPTS	= --syntax-definition=../console.xml \
 		  --highlight-style=custom-highlight.theme
 
-PANDOC_HTML_OPTS = -c https://latex.now.sh/style.css -c style.css \
+PANDOC_HTML_OPTS = -c https://latex.now.sh/style.css \
+		   -c https://deatrich.github.io/style.css \
 		   --template template.htm -V lastupdate="`date +'%d %B %Y'`"
 
 PANDOC_PDF_OPTS	= --template=template.latex -V geometry:margin=2cm \
@@ -53,7 +53,7 @@ test:
 ## DEPENDENCIES
 
 $(HTMLOBJECT): $(MDFILES) template.htm ../console.xml custom-highlight.theme \
-			 contents.txt style.css
+			 contents.txt
 
 $(PDFOBJECT): $(MDFILES) template.latex ../console.xml custom-highlight.theme \
 			 contents.txt
@@ -79,7 +79,6 @@ publish: $(PDFOBJECT) $(HTMLOBJECT)
 	@if test -d $(PUBDIR) ; then \
 	  cp -iup $(PDFOBJECT) $(PUBDIR)$(PDFOBJECT); \
 	  cp -iup $(HTMLOBJECT) $(PUBDIR)$(HTMLOBJECT); \
-	  cp -iup $(DOCXOBJECT) $(PUBDIR)$(DOCXOBJECT); \
 	else \
 	  echo "Missing publishing directory: $(PUBDIR)"; \
 	fi
