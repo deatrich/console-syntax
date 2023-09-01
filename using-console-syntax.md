@@ -69,7 +69,7 @@ highlighter.
 The contents of this file are [embedded in a fenced code block](#test.console)
 at the end of this document.
 
-## Configure Gvim/Vim
+## Configure Gvim/Vim {#vim}
 
 For the Gvim or Vim editors, the Vim files should be installed in
 your home directory:
@@ -98,7 +98,7 @@ $ grep fenced_languages ~/.vimrc
 let g:markdown_fenced_languages = ['console']
 ```
 
-## Configure Kate
+## Configure Kate {#kate}
 
 For the Kate editor, it will depend on the version of Kate you are using.
 In my case on Ubuntu LTS 22.04 the console.xml file is installed this way:
