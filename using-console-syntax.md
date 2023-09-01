@@ -96,6 +96,8 @@ settings in *vimrc.example*.
 $ vim ~/.vimrc
 $ grep fenced_languages ~/.vimrc
 let g:markdown_fenced_languages = ['console']
+"" Actually you can enable many other languages or file types:
+""let g:markdown_fenced_languages = ['console', 'xml', 'css']
 ```
 
 ## Configure Kate {#kate}
